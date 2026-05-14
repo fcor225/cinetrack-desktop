@@ -1,0 +1,88 @@
+/* ═══════════════════════════════════════════════
+   Cine-Calendario (Heatmap) - Estilos
+   ═══════════════════════════════════════════════ */
+
+.cine-calendar {
+    margin: var(--space-3xl) 0;
+    padding: var(--space-2xl);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.cine-calendar h2 {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: 1.5rem;
+    font-family: var(--font-heading);
+}
+
+.cine-calendar__desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-2xl);
+}
+
+.cine-calendar__container {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: var(--space-md);
+}
+
+/* ── Sobrescribiendo la librería react-calendar-heatmap ── */
+.react-calendar-heatmap {
+    min-width: 600px;
+}
+
+.react-calendar-heatmap text {
+    font-size: 8px;
+    fill: var(--text-muted);
+}
+
+.react-calendar-heatmap rect {
+    rx: 2; /* Border radius de los cuadraditos */
+    ry: 2;
+    stroke: var(--bg-card); /* Separación visual como borde */
+    stroke-width: 1px;
+}
+
+/* Tooltip nativo desactivado */
+.react-calendar-heatmap rect:hover {
+    stroke: #fff;
+    stroke-width: 1px;
+}
+
+/* ── Escala de Colores (Púrpura neón inspirado en GitHub) ── */
+.color-empty { fill: rgba(255, 255, 255, 0.05); }
+.color-scale-1 { fill: #d8b4fe; } /* violet-300 */
+.color-scale-2 { fill: #c084fc; } /* violet-400 */
+.color-scale-3 { fill: #a855f7; } /* violet-500 */
+.color-scale-4 { fill: #7e22ce; } /* violet-700 */
+
+/* ── Leyenda ── */
+.cine-calendar__legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.legend-boxes {
+    display: flex;
+    gap: 4px;
+}
+
+.legend-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.legend-box.color-empty { background: rgba(255, 255, 255, 0.05); }
+.legend-box.color-scale-1 { background: #d8b4fe; }
+.legend-box.color-scale-2 { background: #c084fc; }
+.legend-box.color-scale-3 { background: #a855f7; }
+.legend-box.color-scale-4 { background: #7e22ce; }

@@ -1,0 +1,16 @@
+.footer {
+  background: var(--bg-secondary); border-top: 1px solid var(--border-color);
+  padding: var(--space-2xl) 0 var(--space-lg); margin-top: var(--space-3xl);
+}
+.footer__inner { display: flex; flex-wrap: wrap; gap: var(--space-2xl); }
+.footer__brand { flex: 1; min-width: 200px; }
+.footer__logo { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; }
+.footer__tagline { color: var(--text-muted); font-size: 0.85rem; margin-top: var(--space-xs); }
+.footer__links { display: flex; gap: var(--space-2xl); }
+.footer__col { display: flex; flex-direction: column; gap: var(--space-xs); }
+.footer__col h4 { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--space-xs); }
+.footer__col a { color: var(--text-muted); font-size: 0.85rem; text-decoration: none; transition: color var(--transition-fast); }
+.footer__col a:hover { color: var(--text-primary); }
+.footer__bottom { width: 100%; padding-top: var(--space-lg); border-top: 1px solid var(--border-color); margin-top: var(--space-lg); }
+.footer__bottom p { font-size: 0.8rem; color: var(--text-muted); text-align: center; }
+.footer__bottom a { color: var(--accent-blue); }

@@ -1,0 +1,43 @@
+/* ── App Layout — Sistema de Grid con Sidebar ── */
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ── Área de contenido principal ── */
+.page-wrapper {
+    flex: 1;
+    margin-left: var(--sb-width-collapsed, 64px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left var(--sb-transition, 0.28s cubic-bezier(0.4, 0, 0.2, 1));
+    /* Espacio para el TopNavbar fijo (64px) */
+    padding-top: 64px;
+}
+
+/* Cuando el sidebar está expandido → ampliar margen */
+.app-layout--expanded .page-wrapper {
+    margin-left: var(--sb-width-expanded, 240px);
+}
+
+/* Sin sidebar (usuarios no autenticados) */
+.app-layout--no-sidebar .page-wrapper {
+    margin-left: 0;
+    padding-top: 0;
+}
+
+/* ── Páginas fullscreen (CineSwipe, CineReels) ── */
+.page-wrapper--fullscreen {
+    overflow: hidden;
+    padding-top: 0;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+    .page-wrapper,
+    .app-layout--expanded .page-wrapper {
+        margin-left: 0 !important;
+    }
+}

@@ -1,0 +1,10 @@
+.star-rating { display: inline-flex; align-items: center; gap: 2px; }
+.star { transition: all var(--transition-fast); }
+.star--empty { color: var(--text-muted); }
+.star--filled { color: var(--accent-gold); }
+.star--interactive { cursor: pointer; }
+.star--interactive:hover { transform: scale(1.2); }
+.star-rating--sm .star { font-size: 0.9rem; }
+.star-rating--md .star { font-size: 1.2rem; }
+.star-rating--lg .star { font-size: 1.6rem; }
+.star-rating__value { margin-left: 6px; font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; }

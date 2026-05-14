@@ -1,0 +1,14 @@
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-xl);
+  justify-content: center;
+}
+@media (min-width: 768px) { .movie-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); } }
+@media (min-width: 1400px) { .movie-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); } }
+.movie-grid__empty {
+  grid-column: 1 / -1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: var(--space-3xl); color: var(--text-muted);
+}
+.movie-grid__empty-icon { font-size: 4rem; margin-bottom: var(--space-md); }

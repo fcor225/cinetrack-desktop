@@ -1,0 +1,94 @@
+.hero {
+  width: 100%; min-height: 70vh; background-size: cover; background-position: center top;
+  position: relative; margin-top: calc(-1 * var(--navbar-height) - var(--space-xl));
+}
+.hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(10,14,23,0.95) 0%, rgba(10,14,23,0.6) 50%, rgba(10,14,23,0.3) 100%),
+              linear-gradient(to top, var(--bg-primary) 0%, transparent 40%);
+  display: flex; align-items: flex-end; padding-bottom: var(--space-3xl);
+}
+.hero__content { max-width: 600px; }
+.hero__title { font-size: 3rem; font-weight: 800; margin-bottom: var(--space-md); line-height: 1.1; }
+.hero__overview { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; margin-bottom: var(--space-md); }
+.hero__meta { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg); color: var(--text-secondary); }
+.hero__rating { color: var(--accent-gold); font-weight: 600; }
+.home-section { margin-top: var(--space-2xl); }
+@media (max-width: 768px) { .hero__title { font-size: 2rem; } .hero { min-height: 50vh; } }
+
+/* ─────────────────────────────────────────────
+   Banner Ruleta del Tiempo
+───────────────────────────────────────────── */
+.roulette-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl) var(--space-2xl);
+    margin: var(--space-3xl) 0;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+}
+
+.roulette-banner:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -10px rgba(168, 85, 247, 0.2);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15));
+}
+
+.roulette-banner__content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.roulette-banner__icon {
+    font-size: 3rem;
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.roulette-banner__title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0 0 var(--space-xs) 0;
+    background: linear-gradient(135deg, #fff, #c4b5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.roulette-banner__text {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.roulette-banner__btn {
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: #fff;
+    font-weight: 700;
+    padding: var(--space-md) var(--space-xl);
+    border: none;
+    border-radius: var(--radius-full);
+    pointer-events: none; /* el click lo maneja el banner */
+}
+
+@media (max-width: 768px) {
+    .roulette-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-lg);
+        padding: var(--space-lg);
+    }
+    .roulette-banner__content {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+}

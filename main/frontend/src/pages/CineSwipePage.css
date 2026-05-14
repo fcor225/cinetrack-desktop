@@ -1,0 +1,411 @@
+/* ═══════════════════════════════════════════════
+   CineSwipePage — Estilos
+   ═══════════════════════════════════════════════ */
+
+/* ── Layout global ── */
+.cineswipe-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centrar verticalmente */
+    /* 100dvh respeta la barra de dirección del móvil; fallback a 100vh */
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: var(--space-2xl) var(--space-md);
+    background: radial-gradient(ellipse at top, #1a0a0a 0%, #0a0a0f 70%);
+    overflow: hidden;
+    /* Compensar el padding-top del page-wrapper */
+    margin-top: calc(-1 * var(--space-lg));
+}
+
+/* ── Header ── */
+.cineswipe-header {
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+.cineswipe-header__title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    font-family: var(--font-heading);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+.cineswipe-header__icon { font-size: 1.4rem; }
+.cineswipe-header__counters { display: flex; gap: var(--space-md); }
+.counter {
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    background: var(--bg-elevated);
+}
+.counter--skip { color: #ff4d4d; border: 1px solid rgba(255,77,77,0.3); }
+.counter--save { color: #ff6b9d; border: 1px solid rgba(255,107,157,0.3); }
+
+/* ── Hint text ── */
+.cineswipe-hint {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: var(--space-2xl); /* Más espacio para que la carta no lo pise */
+    opacity: 0.8;
+}
+
+/* ─────────────────────────────────────────────
+   Mazo de cartas
+───────────────────────────────────────────── */
+.cineswipe-deck {
+    position: relative;
+    width: 100%;
+    max-width: 480px; /* Cartas más grandes */
+    height: 700px;
+    margin-bottom: var(--space-2xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Wrapper de TinderCard — debe ser position absolute para el stack */
+.swipe-card-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+}
+.swipe-card-wrapper:active { cursor: grabbing; }
+
+/* ─────────────────────────────────────────────
+   Carta de película
+───────────────────────────────────────────── */
+.movie-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(255,255,255,0.06);
+    user-select: none;
+    -webkit-user-select: none;
+    transition: transform 0.05s ease;
+}
+
+/* Carta que está encima del mazo — pequeña animación de entrada */
+.movie-card--top {
+    animation: cardEntrance 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes cardEntrance {
+    from { transform: scale(0.95) translateY(10px); opacity: 0.7; }
+    to   { transform: scale(1) translateY(0);    opacity: 1;   }
+}
+
+/* Rating badge */
+.movie-card__rating {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius-full);
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    z-index: 2;
+}
+.movie-card__rating-star { font-size: 0.8rem; }
+
+/* Info overlay (parte inferior) */
+.movie-card__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--space-xl) var(--space-lg) var(--space-lg);
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.95) 0%,
+        rgba(0,0,0,0.8)  50%,
+        transparent      100%
+    );
+    z-index: 2;
+}
+.movie-card__title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    font-family: var(--font-heading);
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    margin: 0 0 var(--space-xs) 0;
+    line-height: 1.2;
+}
+.movie-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--space-sm);
+    align-items: center;
+}
+.movie-card__year {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+}
+.movie-card__genre-chip {
+    font-size: 0.72rem;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(4px);
+}
+.movie-card__overview {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ── Etiquetas de swipe (GUARDAR / PASAR) ── */
+.movie-card__like-label,
+.movie-card__nope-label {
+    position: absolute;
+    top: 20px;
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
+    border-radius: var(--radius-md);
+    border-width: 3px;
+    border-style: solid;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+}
+.movie-card__like-label {
+    left: 20px;
+    color: #22c55e;
+    border-color: #22c55e;
+    transform: rotate(-15deg);
+}
+.movie-card__nope-label {
+    right: 20px;
+    color: #ef4444;
+    border-color: #ef4444;
+    transform: rotate(15deg);
+}
+
+/* ─────────────────────────────────────────────
+   Botones de control
+───────────────────────────────────────────── */
+.cineswipe-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xl); /* Separar botones */
+}
+
+.ctrl-btn {
+    width: 80px; /* Botones más grandes */
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    position: relative;
+}
+.ctrl-btn:hover:not(:disabled) {
+    transform: scale(1.12);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+}
+.ctrl-btn:active:not(:disabled) { transform: scale(0.95); }
+.ctrl-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.ctrl-btn--skip {
+    background: linear-gradient(135deg, #ff4d4d, #c0392b);
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+.ctrl-btn--undo {
+    width: 60px; /* Más grande también */
+    height: 60px;
+    font-size: 1.4rem;
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+.ctrl-btn--save {
+    background: linear-gradient(135deg, #ff6b9d, #e91e8c);
+    color: #fff;
+}
+.ctrl-btn--save::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,107,157,0.4);
+    animation: savePulse 2s ease infinite;
+}
+@keyframes savePulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50%       { transform: scale(1.15); opacity: 0; }
+}
+
+/* ─────────────────────────────────────────────
+   Feedback visual de dirección
+───────────────────────────────────────────── */
+.swipe-feedback {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    padding: 12px 28px;
+    border-radius: var(--radius-lg);
+    border-width: 4px;
+    border-style: solid;
+    pointer-events: none;
+    z-index: 999;
+    animation: feedbackPop 0.6s ease forwards;
+}
+.swipe-feedback--save {
+    color: #22c55e;
+    border-color: #22c55e;
+    background: rgba(34,197,94,0.12);
+}
+.swipe-feedback--skip {
+    color: #ef4444;
+    border-color: #ef4444;
+    background: rgba(239,68,68,0.12);
+}
+@keyframes feedbackPop {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    30%  { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+    70%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+}
+
+/* ─────────────────────────────────────────────
+   Estados especiales
+───────────────────────────────────────────── */
+
+/* Fin del mazo */
+.cineswipe-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--space-md);
+    height: 100%;
+    animation: fadeIn 0.4s ease;
+}
+.cineswipe-empty__icon { font-size: 4rem; }
+.cineswipe-empty h2 { font-size: 1.5rem; margin: 0; }
+.cineswipe-empty p { color: var(--text-secondary); margin: 0; }
+
+/* Offline */
+.cineswipe-offline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px);
+    text-align: center;
+    gap: var(--space-md);
+    padding: var(--space-2xl);
+    animation: fadeIn 0.3s ease;
+}
+.cineswipe-offline__icon { font-size: 5rem; margin-bottom: var(--space-sm); }
+.cineswipe-offline h2 { font-size: 1.5rem; margin: 0; }
+.cineswipe-offline p { color: var(--text-secondary); max-width: 380px; line-height: 1.6; margin: 0; }
+
+/* Loading skeleton */
+.cineswipe-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    padding-top: var(--space-2xl);
+}
+.cineswipe-loading__card {
+    width: 380px;
+    height: 560px;
+    max-width: 90vw;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-card);
+}
+.cineswipe-loading__shimmer {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        var(--bg-card) 25%,
+        var(--bg-elevated) 50%,
+        var(--bg-card) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .cineswipe-deck {
+        max-width: 420px;
+        height: 620px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cineswipe-deck {
+        max-width: 380px;
+        height: 560px;
+        margin-bottom: var(--space-xl);
+    }
+    .ctrl-btn { width: 68px; height: 68px; font-size: 1.6rem; }
+    .ctrl-btn--undo { width: 52px; height: 52px; font-size: 1.2rem; }
+    .cineswipe-hint { font-size: 0.8rem; margin-bottom: var(--space-xl); }
+}
+
+@media (max-width: 480px) {
+    .cineswipe-deck {
+        height: 480px;
+        max-width: 340px;
+        margin-bottom: var(--space-lg);
+    }
+    .movie-card__title { font-size: 1.2rem; }
+    .ctrl-btn { width: 56px; height: 56px; font-size: 1.4rem; }
+    .ctrl-btn--undo { width: 44px; height: 44px; font-size: 1rem; }
+    .cineswipe-hint { font-size: 0.75rem; margin-bottom: var(--space-lg); }
+    .cineswipe-header { max-width: 340px; }
+}

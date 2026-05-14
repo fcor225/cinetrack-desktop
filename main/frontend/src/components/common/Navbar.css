@@ -1,0 +1,73 @@
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--navbar-height); z-index: var(--z-navbar);
+  background: rgba(10, 14, 23, 0.85); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+}
+.navbar__inner {
+  display: flex; align-items: center; gap: var(--space-lg);
+  height: 100%;
+}
+.navbar__logo {
+  display: flex; align-items: center; gap: var(--space-sm);
+  text-decoration: none; color: var(--text-primary); flex-shrink: 0;
+}
+.navbar__logo-icon { font-size: 1.5rem; }
+.navbar__logo-text { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; }
+.navbar__links { display: flex; align-items: center; gap: var(--space-md); margin-left: auto; }
+.navbar__link {
+  color: var(--text-secondary); font-size: 0.9rem; font-weight: 500;
+  padding: 6px 12px; border-radius: var(--radius-sm);
+  transition: all var(--transition-fast); text-decoration: none;
+}
+.navbar__link:hover { color: var(--text-primary); }
+.navbar__link.active { color: var(--accent-primary); background: rgba(229,9,20,0.1); }
+.navbar__user { position: relative; cursor: pointer; }
+.navbar__avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--gradient-accent); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.9rem;
+  transition: box-shadow var(--transition-fast);
+}
+.navbar__avatar:hover { box-shadow: 0 0 0 2px var(--accent-primary); }
+.navbar__dropdown {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  background: var(--bg-elevated); border: 1px solid var(--border-color);
+  border-radius: var(--radius-md); padding: var(--space-xs);
+  min-width: 180px; box-shadow: var(--shadow-lg);
+  animation: fadeIn 0.2s ease;
+}
+.navbar__dropdown-item {
+  display: flex; align-items: center; gap: var(--space-sm);
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  font-size: 0.85rem; color: var(--text-primary);
+  text-decoration: none; width: 100; background: none; border: none;
+  cursor: pointer; transition: background var(--transition-fast);
+  width: 100%; text-align: left;
+}
+.navbar__dropdown-item:hover { background: var(--bg-input); }
+.navbar__dropdown-item--danger:hover { background: rgba(229,9,20,0.1); color: var(--accent-primary); }
+
+/* CineSwipe — Destacar enlace en la navbar */
+.navbar__link--highlight {
+    background: linear-gradient(135deg, #ff6b9d, #e50914);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    position: relative;
+}
+.navbar__link--highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0; height: 2px;
+    background: linear-gradient(135deg, #ff6b9d, #e50914);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+.navbar__link--highlight:hover::after,
+.navbar__link--highlight.active::after { opacity: 1; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }

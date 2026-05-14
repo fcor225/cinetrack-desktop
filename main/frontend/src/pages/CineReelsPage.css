@@ -1,0 +1,305 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   CineReelsPage — Estilos TikTok/Reels
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Contenedor principal tipo TikTok ── */
+.cinereels-feed {
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    background: #000;
+    /* Con el nuevo sidebar lateral no hay offset de navbar superior */
+    margin-top: calc(-1 * var(--space-lg)); /* Anular el padding-top del page-wrapper */
+    box-sizing: border-box;
+}
+.cinereels-feed::-webkit-scrollbar {
+    display: none;                  /* Chrome/Safari */
+}
+
+/* ── Cada Reel (sección 100vh) ── */
+.reel {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;       /* Fuerza parada en cada reel (no salta) */
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── iframe de YouTube a pantalla completa ── */
+.reel__iframe-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+.reel__iframe {
+    position: absolute;
+    /* Centrar y escalar para cubrir 16:9. Se usa scale(1.1) para mantener inmersión permitiendo ver controles. */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    width: 177.78vh;   /* 16/9 × 100vh */
+    height: 100vh;
+    min-width: 100%;
+    min-height: 56.25vw; /* 9/16 × 100vw */
+    border: none;
+}
+
+/* ── Gradiente oscuro inferior (legibilidad del texto) ── */
+.reel__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.92) 0%,
+        rgba(0, 0, 0, 0.55) 35%,
+        rgba(0, 0, 0, 0.1)  60%,
+        transparent         100%
+    );
+    pointer-events: none;
+}
+
+/* ── Gradiente superior sutil (para el navbar) ── */
+.reel__overlay-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 120px;
+    z-index: 1;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.6) 0%,
+        transparent        100%
+    );
+    pointer-events: none;
+}
+
+/* ── Contenido inferior izquierda (título + sinopsis) ── */
+.reel__info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 120px;         /* Espacio para los botones laterales */
+    padding: var(--space-2xl) var(--space-xl);
+    z-index: 2;
+}
+.reel__title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 900;
+    font-family: var(--font-heading);
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+    margin: 0 0 var(--space-sm) 0;
+    line-height: 1.2;
+}
+.reel__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+.reel__year {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+}
+.reel__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.82rem;
+    color: #ffd700;
+    font-weight: 700;
+}
+.reel__overview {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+    max-width: 600px;
+}
+
+/* ── Botones laterales derechos ── */
+.reel__actions {
+    position: absolute;
+    bottom: var(--space-2xl);
+    right: var(--space-lg);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+}
+.reel__action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px;
+    width: 64px;
+    min-height: 64px;
+    padding: 12px 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-align: center;
+}
+.reel__action-btn:hover {
+    background: rgba(255,255,255,0.22);
+    transform: scale(1.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.reel__action-btn:active { transform: scale(0.95); }
+.reel__action-btn--save {
+    background: rgba(229, 9, 20, 0.75);
+    border-color: rgba(229, 9, 20, 0.5);
+}
+.reel__action-btn--save:hover {
+    background: rgba(229, 9, 20, 0.95);
+}
+.reel__action-btn--save.saved {
+    background: rgba(34, 197, 94, 0.75);
+    border-color: rgba(34, 197, 94, 0.5);
+}
+.reel__action-btn--save.saved:hover {
+    background: rgba(34, 197, 94, 0.95);
+}
+.reel__action-icon { font-size: 1.6rem; line-height: 1; }
+.reel__action-label { font-size: 0.65rem; }
+
+/* ── Indicador de vídeo (nombre del trailer) ── */
+.reel__video-name {
+    position: absolute;
+    bottom: var(--space-md);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60vw;
+    text-align: center;
+}
+
+/* ── Scroll indicator (flecha) ── */
+.reel__scroll-hint {
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.7rem;
+    animation: scrollBounce 2s ease infinite;
+    pointer-events: none;
+}
+@keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+    50%       { transform: translateX(-50%) translateY(6px); opacity: 0.9; }
+}
+
+/* ── Estado de carga (shimmer) ── */
+.cinereels-loading {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    background: #000;
+    color: #fff;
+}
+.cinereels-loading__bars {
+    display: flex;
+    gap: 6px;
+    align-items: flex-end;
+    height: 40px;
+}
+.cinereels-loading__bar {
+    width: 6px;
+    background: var(--accent-primary);
+    border-radius: 3px;
+    animation: barPulse 1s ease infinite;
+}
+.cinereels-loading__bar:nth-child(2) { animation-delay: 0.15s; }
+.cinereels-loading__bar:nth-child(3) { animation-delay: 0.30s; }
+.cinereels-loading__bar:nth-child(4) { animation-delay: 0.45s; }
+.cinereels-loading__bar:nth-child(5) { animation-delay: 0.60s; }
+@keyframes barPulse {
+    0%, 100% { height: 8px;  opacity: 0.4; }
+    50%       { height: 40px; opacity: 1;   }
+}
+
+/* ── Estado offline ── */
+.cinereels-offline {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--space-md);
+    background: #000;
+    color: #fff;
+    padding: var(--space-2xl);
+}
+.cinereels-offline__icon { font-size: 5rem; }
+.cinereels-offline h2 { font-size: 1.5rem; margin: 0; }
+.cinereels-offline p { color: rgba(255,255,255,0.6); max-width: 360px; line-height: 1.6; margin: 0; }
+
+/* ── Toast de guardado (feedback rápido) ── */
+.reel__save-feedback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(34, 197, 94, 0.9);
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 800;
+    padding: 14px 28px;
+    border-radius: var(--radius-lg);
+    z-index: 10;
+    pointer-events: none;
+    animation: savePop 0.8s ease forwards;
+    white-space: nowrap;
+}
+@keyframes savePop {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+    30%  { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+    70%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .reel__info { right: 90px; padding: var(--space-xl) var(--space-lg); }
+    .reel__action-btn { width: 54px; min-height: 54px; }
+    .reel__action-icon { font-size: 1.35rem; }
+    .reel__title { font-size: 1.2rem; }
+    .reel__overview { -webkit-line-clamp: 2; }
+}

@@ -1,0 +1,74 @@
+/* ── AchievementsPage ── */
+.achievements-page { padding-top: var(--space-lg); }
+.achievements-page__title { font-size: 2rem; margin-bottom: var(--space-xl); }
+
+/* Rank Card */
+.rank-card {
+    display: flex; align-items: center; gap: var(--space-lg);
+    padding: var(--space-xl); border-radius: var(--radius-lg);
+    margin-bottom: var(--space-xl);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    position: relative; overflow: hidden;
+}
+.rank-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(0,0,0,0.35); z-index: 0;
+}
+.rank-card__icon { font-size: 4rem; z-index: 1; }
+.rank-card__info { display: flex; flex-direction: column; gap: 4px; z-index: 1; }
+.rank-card__name { font-size: 2rem; font-weight: 900; font-family: var(--font-heading); text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
+.rank-card__xp { font-size: 1.1rem; color: rgba(255,255,255,0.85); font-weight: 600; }
+.rank-card__next { margin-left: auto; z-index: 1; font-size: 0.85rem; color: rgba(255,255,255,0.7); max-width: 160px; text-align: right; }
+
+/* Progress Bar */
+.rank-progress { margin-bottom: var(--space-2xl); }
+.rank-progress__labels { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; color: var(--text-secondary); }
+.rank-progress__percent { font-weight: 700; color: var(--text-primary); }
+.rank-progress__bar-bg { height: 14px; background: var(--bg-elevated); border-radius: var(--radius-full); overflow: hidden; }
+.rank-progress__bar-fill {
+    height: 100%; border-radius: var(--radius-full);
+    transition: width 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 0 12px rgba(255,255,255,0.3);
+}
+
+/* XP Rewards Grid */
+.xp-rewards-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md); margin-bottom: var(--space-2xl);
+}
+.xp-reward-item {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    border-radius: var(--radius-md); padding: var(--space-md);
+    text-align: center;
+}
+.xp-reward-icon { font-size: 1.8rem; }
+.xp-reward-action { font-size: 0.8rem; color: var(--text-secondary); }
+.xp-reward-value { font-size: 1rem; font-weight: 800; color: var(--accent-primary); }
+
+/* Challenges */
+.challenges-section h2 { margin-bottom: var(--space-lg); }
+.challenges-list { display: flex; flex-direction: column; gap: var(--space-md); }
+.challenge-card {
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    border-radius: var(--radius-md); padding: var(--space-lg);
+    transition: border-color var(--transition-fast);
+}
+.challenge-card--done { border-color: #22c55e; background: rgba(34,197,94,0.05); }
+.challenge-card__header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm); }
+.challenge-card__icon { font-size: 1.8rem; flex-shrink: 0; }
+.challenge-card__info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.challenge-card__name { font-size: 0.95rem; font-weight: 700; }
+.challenge-card__desc { font-size: 0.82rem; color: var(--text-secondary); }
+.challenge-card__reward { flex-shrink: 0; }
+.xp-pill { background: rgba(229,9,20,0.15); color: var(--accent-primary); border: 1px solid var(--accent-primary); padding: 2px 10px; border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 700; }
+.challenge-done-badge { color: #22c55e; font-size: 0.85rem; font-weight: 600; }
+.challenge-card__progress-bar-bg { height: 6px; background: var(--bg-elevated); border-radius: var(--radius-full); overflow: hidden; margin-bottom: 6px; }
+.challenge-card__progress-bar-fill { height: 100%; background: var(--gradient-accent); border-radius: var(--radius-full); transition: width 1s ease; }
+.challenge-card__progress-text { font-size: 0.78rem; color: var(--text-secondary); text-align: right; }
+
+@media (max-width: 768px) {
+    .xp-rewards-grid { grid-template-columns: repeat(2, 1fr); }
+    .rank-card { flex-wrap: wrap; }
+    .rank-card__next { margin-left: 0; text-align: left; }
+}
