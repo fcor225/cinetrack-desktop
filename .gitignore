@@ -25,10 +25,3 @@ dist-ssr
 
 # Artefactos del sistema
 .DS_Store
-
-# Local env files
-.env
-*.env.local
-
-# Database
-database/*.db
