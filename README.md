@@ -14,12 +14,12 @@ Resiliencia Offline: La aplicación detecta tu estado de conexión. Si no hay in
 
 # 🛠️ Tecnologías Utilizadas
 
-Frontend: React 19 + Vite (Interfaz reactiva y modular).
+Frontend: React 19 (Interfaz reactiva y modular).
 APIs Externas:
 The Movie Database (TMDB): Metadatos, imágenes y multimedia.
 Trakt.tv API: Comentarios y reseñas de la comunidad global.
-Backend/Escritorio: Node.js + Express (Capa de servicios) + Electron.js (Empaquetado nativo).
-Base de Datos: SQLite (mediante better-sqlite3) para persistencia local 100% privada.
+Backend: Node.js + Express (Capa de servicios REST y WebSockets).
+Base de Datos: SQLite para persistencia local 100% privada.
 Estilos: CSS3 moderno con variables personalizadas, animaciones fluidas y estética premium dark mode.
 
 # 📦 Instalación y Ejecución
@@ -31,8 +31,6 @@ git clone https://github.com/martincordero06052002-ux/cinetrack-desktop.git
 Instalar dependencias:
 
 bash
-# En la raíz
-npm install
 # En las carpetas de servicios
 cd main/frontend && npm install
 cd ../backend && npm install
@@ -40,14 +38,26 @@ Configurar Variables de Entorno:
 
 Crea un archivo .env en main/backend/ con tu TMDB_ACCESS_TOKEN y secretos JWT.
 Crea un archivo .env en main/frontend/ con tus REACT_APP_TRAKT_CLIENT_ID y Secret.
-Ejecutar:
+
+Ejecutar usando Docker (Recomendado):
 
 bash
+cd main
+docker-compose up --build
+
+Ejecutar manualmente (Sin Docker):
+
+bash
+# Terminal 1: Backend
+cd main/backend
 npm run dev
+
+# Terminal 2: Frontend
+cd main/frontend
+npm start
 
 # 📂 Estructura del Proyecto Profesional
 
 main/frontend/: Aplicación React con capa de servicios modularizada.
 main/backend/: Servidor Express con proxy para APIs externas y controladores de base de datos.
 database/: Ubicación de la base de datos persistente cinetrack.db.
-electron/: Proceso principal y configuración de la ventana nativa.
